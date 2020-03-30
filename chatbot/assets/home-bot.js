@@ -6,7 +6,7 @@ botui.message.bot({ // show first message
 }).then(() => {
   return botui.message.bot({ // second one
     delay: 2000, // wait 2 sec.
-    content: 'Let me demonstrate how we can use vibrations and chat messaging for our experiment'
+    content: 'Let me demonstrate SHIYT how we can use vibrations and chat messaging for our experiment'
   })
 }).then(() => {
   return botui.action.button({ // let the user perform an action
