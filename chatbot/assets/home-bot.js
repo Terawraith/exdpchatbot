@@ -387,7 +387,7 @@ var ending = function () {
           value: 'victory'
         },
         {
-          text: "It didn't work, I still need help",
+          text: "Restarting my device didn't work either.. I still need help.",
           value: 'endofroad'
         }
       ]
@@ -404,6 +404,7 @@ var ending = function () {
 }
 
 var victory = function () {
+  console.log("Positive outcome, victory")
   botui.message.add({
     delay: 2000,
     content: "Great to hear! Is there anything else I can be of service with? "
@@ -429,20 +430,10 @@ var victory = function () {
 };
 
 var endofRoad = function () {
-  botui.action.button({ // let the user perform an action, choose which answer to give
-    delay: 3000,
-      action: [
-        {
-          text: "Restarting my device didn't work either.. I still need help.",
-          value: ''
-        }
-      ]
-    })
-  .then(function () {
-    return botui.message.add({
-      delay: 2000,
-      content: 'I am sorry to hear that. Please contact our customer service during weekdays opening hours: 8 - 10 GMT +2 / CEST +8'
-    });
+  console.log("Negative outcome, gameover")
+  botui.message.add({
+    delay: 2000,
+    content: 'I am sorry to hear that. Please contact our customer service during weekdays opening hours: 8 - 10 GMT +2 / CEST +8'
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
@@ -457,7 +448,7 @@ var endofRoad = function () {
   })
 };
 
-/*
+/* //OLD ORIGINAL CHATBOT 
 
 var botui = BotUI('exdp-demo');
 
