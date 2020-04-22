@@ -86,6 +86,21 @@ botui.message.bot({ // show first message
   }
 });
 
+var preWifiRestart = function () {
+  console.log("preWifiRestart")
+  botui.action.button({ // let the user perform an action, choose which answer to give
+    delay: 2500,
+    action: [
+      {
+        text: "It didn't work. I still need help.",
+        value: ''
+      }
+    ]
+  })
+  .then(function () {
+    wifiRestart();
+  })
+}
 
 var wifiRestart = function () {
   console.log("wifiRestart")
@@ -144,22 +159,27 @@ var wifiRestart = function () {
     if( wifiVisibleDone && wifiRestartDone == true ) {
       cont(); // Should skip the rest of this chat, if wifiVisibleDone == false
     }
+    if ( wifiVisibleDone == false && wifiRestartDone == true ) {
+      preWifiVisible();
+    }
   })
-  .then(() => {
-    return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2500,
-      action: [
-        {
-          text: "It didn't work. I still need help.",
-          value: ''
-        }
-      ]
-    })
+};
+
+var preWifiVisible = function () {
+  console.log("preWifiVisible")
+  botui.action.button({ // let the user perform an action, choose which answer to give
+    delay: 2500,
+    action: [
+      {
+        text: "It didn't work. I still need help.",
+        value: ''
+      }
+    ]
   })
   .then(function () {
     wifiVisible();
   })
-};
+}
 
 var wifiVisible = function () {
   console.log("wifiVisible")
@@ -191,22 +211,11 @@ var wifiVisible = function () {
   })
   .then(() => {
     if( wifiVisibleDone && wifiRestartDone == true ) {
-      cont(); // Should skip the rest of this chat, if wifiRestart == false
+      cont(); // Should skip the rest of this chat, if wifiVisibleDone == false
     }
-  })
-  .then(() => {
-    return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2500,
-      action: [
-        {
-          text: "It didn't work. I still need help.",
-          value: ''
-        }
-      ]
-    })
-  })
-  .then(function () {
-    wifiRestart();
+    if ( wifiVisibleDone == true && wifiRestartDone == false ) {
+      preWifiRestart();
+    }
   })
 };
 
@@ -241,6 +250,22 @@ var cont = function () {
   });
 };
 
+var preWifiConnect = function () {
+  console.log("preWifiConnect")
+  botui.action.button({ // let the user perform an action, choose which answer to give
+    delay: 2500,
+    action: [
+      {
+        text: "Awesome, the signal is better now! But I still can't connect.",
+        value: ''
+      }
+    ]
+  })
+  .then(function () {
+    wifiConnect();
+  })
+}
+
 var wifiConnect = function () {
   console.log("wifiConnect")
   botui.message.add({
@@ -267,22 +292,27 @@ var wifiConnect = function () {
     if( wifiBlockedDone && wifiConnectDone == true ) {
       ending(); // Should skip the rest of this chat, if == true
     } 
-  })
-  .then(() => {
-    return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2500,
-      action: [
-        {
-          text: "Awesome, i'm connected now! But the signal strenght is low,",
-          value: ''
-        }
-      ]
-    })
-  })
-  .then(function () {
-    wifiBlocked();
+    if( wifiBlockedDone == false && wifiConnectDone == true ) {
+      preWifiBlocked();
+    }
   })
 };
+
+var preWifiBlocked = function () {
+  console.log("preWifiBlocked")
+  botui.action.button({ // let the user perform an action, choose which answer to give
+    delay: 2500,
+    action: [
+      {
+        text: "Awesome, i'm connected now! But the signal strenght is low,",
+        value: ''
+      }
+    ]
+  })
+.then(function () {
+  wifiBlocked();
+})
+}
 
 var wifiBlocked = function () {
   console.log("wifiBlocked")
@@ -315,20 +345,9 @@ var wifiBlocked = function () {
     if( wifiBlockedDone && wifiConnectDone == true ) {
       ending(); // Should skip the rest of this chat, if == true 
     }
-  })
-  .then(() => {
-    return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2500,
-      action: [
-        {
-          text: "Awesome, the signal is better now! But I still can't connect.",
-          value: ''
-        }
-      ]
-    })
-  })
-  .then(function () {
-    wifiConnect();
+    if (wifiBlockedDone == true && wifiConnectDone == false) {
+      preWifiConnect();
+    }
   })
 };
 
@@ -410,21 +429,15 @@ var victory = function () {
 };
 
 var endofRoad = function () {
-  botui.message.add({
-    delay: 2000,
-    content: 'I am sorry to hear that . Please try and restart your device. If your device is not updated, it might help to update it.'
-  })
-  .then(() => {
-    return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 3000,
+  botui.action.button({ // let the user perform an action, choose which answer to give
+    delay: 3000,
       action: [
         {
-          text: "That didn't work either. I still need help.",
+          text: "Restarting my device didn't work either.. I still need help.",
           value: ''
         }
       ]
     })
-  })
   .then(function () {
     return botui.message.add({
       delay: 2000,
