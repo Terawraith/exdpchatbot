@@ -59,7 +59,7 @@ botui.message.bot({ // show first message
 .then(function () {
   return botui.message.bot({
     delay: 2500,
-    content: "I'm sorry to hear that your wifi is not working properly. What seems to be the problem?",
+    content: "I'm sorry to hear that your wifi is not working properly  " + customerName + ". What seems to be the problem?",
   })
 })
 .then(() => {
@@ -87,7 +87,7 @@ botui.message.bot({ // show first message
 });
 
 var preWifiRestart = function () {
-  console.log("preWifiRestart")
+  console.log("preWifiRestart chat")
   botui.action.button({ // let the user perform an action, choose which answer to give
     delay: 2500,
     action: [
@@ -103,7 +103,7 @@ var preWifiRestart = function () {
 }
 
 var wifiRestart = function () {
-  console.log("wifiRestart")
+  console.log("wifiRestart chat")
   botui.message.add({
     delay: 2000,
     content: "Try to restart your Wifi router, please do the following:"
@@ -166,7 +166,7 @@ var wifiRestart = function () {
 };
 
 var preWifiVisible = function () {
-  console.log("preWifiVisible")
+  console.log("preWifiVisible chat")
   botui.action.button({ // let the user perform an action, choose which answer to give
     delay: 2500,
     action: [
@@ -182,10 +182,10 @@ var preWifiVisible = function () {
 }
 
 var wifiVisible = function () {
-  console.log("wifiVisible")
+  console.log("wifiVisible chat")
   botui.message.add({
     delay: 2000,
-    content: "Please try the following:"
+    content: "Okay  " + customerName + ". Please try the following:"
   })
   .then(function () {
     return botui.message.add({
@@ -220,10 +220,10 @@ var wifiVisible = function () {
 };
 
 var cont = function () {
-  console.log("continue")
+  console.log("continue  chat")
   botui.message.add({
     delay: 4000,
-    content: "Okay " + customerName + ", is your WiFi now visible?"
+    content: customerName + ", is your WiFi now visible?"
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
@@ -251,7 +251,7 @@ var cont = function () {
 };
 
 var preWifiConnect = function () {
-  console.log("preWifiConnect")
+  console.log("preWifiConnect chat")
   botui.action.button({ // let the user perform an action, choose which answer to give
     delay: 2500,
     action: [
@@ -267,10 +267,10 @@ var preWifiConnect = function () {
 }
 
 var wifiConnect = function () {
-  console.log("wifiConnect")
+  console.log("wifiConnect chat")
   botui.message.add({
     delay: 2500,
-    content: "Okay, then please try the following:"
+    content: "Okay  " + customerName + ", please try the following:"
   })
   .then(function () {
     return botui.message.add({
@@ -299,7 +299,7 @@ var wifiConnect = function () {
 };
 
 var preWifiBlocked = function () {
-  console.log("preWifiBlocked")
+  console.log("preWifiBlocked chat")
   botui.action.button({ // let the user perform an action, choose which answer to give
     delay: 2500,
     action: [
@@ -315,10 +315,10 @@ var preWifiBlocked = function () {
 }
 
 var wifiBlocked = function () {
-  console.log("wifiBlocked")
+  console.log("wifiBlocked chat")
   botui.message.add({
     delay: 2000,
-    content: "The WiFi signal can be blocked by physical objects. Is anything covering your WiFi router?"
+    content: "The WiFi signal can be blocked by physical objects. Is anything covering or blocking your WiFi router?"
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
@@ -407,7 +407,7 @@ var victory = function () {
   console.log("Positive outcome, victory")
   botui.message.add({
     delay: 2000,
-    content: "Great to hear! Is there anything else I can be of service with? "
+    content: "Great to hear  " + customerName + "! Is there anything else I can be of service with? "
   })
   
   // --- Celebration vibration 
@@ -433,7 +433,7 @@ var endofRoad = function () {
   console.log("Negative outcome, gameover")
   botui.message.add({
     delay: 2000,
-    content: 'I am sorry to hear that. Please contact our customer service during weekdays opening hours: 8 - 10 GMT +2 / CEST +8'
+    content: "I am sorry to hear that  " + customerName + ". Please contact our customer service during weekdays opening hours: 8 - 10 GMT +2 / CEST +8"
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
