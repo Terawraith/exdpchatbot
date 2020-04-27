@@ -10,11 +10,11 @@ var wifiConnectDone = false
 
 botui.message.bot({ // show first message
   delay: 1000,
-  content: 'Please type in your customer name'
+  content: 'Hello. Please type in your customer name'
 })
 .then(function () {
   return botui.action.text({
-    delay: 1000,
+    delay: 2000,
     action: {
       value: '',
       placeholder: 'Customer name'
@@ -105,7 +105,7 @@ var wifiRestart = function () {
       content: '1. Unplug your wifi router or modem from its power outlet (don’t just turn it off).'
     });
   })
-  .then(function () {
+    .then(function () {
     return botui.message.add({
       delay: 2500,
       content: '2. Wait 15-20 seconds, then plug it back in.'
@@ -377,7 +377,7 @@ var victory = function () {
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2000,
+      delay: 2500,
       action: [
         {
           text: "No, I want to go and surf the waves of the internet",
@@ -385,6 +385,9 @@ var victory = function () {
         }
       ]
     })
+  })
+  .then(function () {
+    questions();
   })
 };
 
@@ -396,16 +399,26 @@ var endofRoad = function () {
   })
   .then(() => {
     return botui.action.button({ // let the user perform an action, choose which answer to give
-      delay: 2000,
+      delay: 2500,
       action: [
         {
-          text: "Great, thanks...",
+          text: "Okay, thanks..",
           value: 'gameover'
         }
       ]
     })
   })
+  .then(function () {
+    questions();
+  })
 };
+
+var questions = function () {
+  botui.message.add({
+    delay: 3000,
+    content: "The prototype is over: please go to the online questionnaire by following this [link](https:///www.itu.dk/people/jaar/exdp)"
+  });
+}
 
 /* //OLD ORIGINAL CHATBOT 
 
@@ -508,4 +521,34 @@ var end = function () {
   });
 };
 
+ANDERS RODER
+
+/*
+// --- Anders roder her  
+.then(function() {
+  setTimeout(function(){ navigator.vibrate([800, 300, 200, 100, 300, 100, 200]) }, 2000) //vibration set like this is sent before the next message 
+})
+// --- til her
+
+// --- Vibration 2.point  
+.then(function() {
+  setTimeout(function(){ navigator.vibrate([500, 100, 500]) }, 2500) //vibration set like this is sent before the next message 
+})
+// --- til her
+
+ // --- Vibration 3.point 
+.then(function() {
+  setTimeout(function(){ navigator.vibrate([333, 100, 333, 100, 333]) }, 2500) //vibration set like this is sent before the next message 
+})
+// --- til her
+
+// --- Celebration vibration 
+.then(function() {
+  setTimeout(function(){ navigator.vibrate([30, 100, 30, 100, 30, 100, 30]) }, 20) //vibration set like this is sent before the next message 
+})
+// --- til her
+
+
 */
+
+
