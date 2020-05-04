@@ -33,7 +33,9 @@ botui.message.bot({ // show first message
 })
 // ------- Sending and testing MQTT messaging ----------
 .then(function() {
-  sendMessage("Some very very very cool message is written here."); 
+  var d = new Date();
+  var t = d.getTime();
+  sendMessage("Prototype Backup, Customer Name: " + customerName + " & Starting Time Stamp: " + t)
 })   
 // -----------------------------------------------------
 .then(() => {
@@ -417,7 +419,12 @@ var questions = function () {
   botui.message.add({
     delay: 3000,
     content: "The prototype is over: please go to the online questionnaire by following this [link](https:///www.itu.dk/people/jaar/exdp)"
-  });
+  })
+  .then(function() {
+    var d = new Date();
+    var t = d.getTime();
+    sendMessage("Prototype Backup, Customer Name: " + customerName + " & Ending Time Stamp: " + t)
+  }) ;
 }
 
 /* //OLD ORIGINAL CHATBOT 
