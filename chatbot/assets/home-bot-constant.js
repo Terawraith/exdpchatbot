@@ -476,8 +476,8 @@ var endofRoad = function () {
 
 var questions = function () {
   botui.message.add({
-    delay: 3000,
-    content: "The prototype is over: please go to the online questionnaire by following this [link](https:///www.itu.dk/people/jaar/exdp)"
+    delay: 1000,
+    content: "The prototype is over: please close this browser and return to the online questionnaire"
   })
   .then(function() {
     var d = new Date();
